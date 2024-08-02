@@ -40,20 +40,21 @@ for i in range(k):
                     grid[0][0] = last
         
 
+# pozor
 
-def twoSum(nums, target):
-        already_checked = []
-        for i in range(len(nums)):
-            if i in already_checked:
-                continue
-            for j in range(len(nums)):
-                if i == j:
-                    continue
-                if j in already_checked:
-                    continue
-                if nums[i] + nums[j] == target:
-                    return [i, j]
-            already_checked.append(i)
+# def twoSum(nums, target):
+#         already_checked = []
+#         for i in range(len(nums)):
+#             if i in already_checked:
+#                 continue
+#             for j in range(len(nums)):
+#                 if i == j:
+#                     continue
+#                 if j in already_checked:
+#                     continue
+#                 if nums[i] + nums[j] == target:
+#                     return [i, j]
+#             already_checked.append(i)
 
 
 heights = [1,8,6,2,5,4,8,3,7]
@@ -522,6 +523,177 @@ nums = [1,1,1,2,2,3]
 k = 2
 
 #print(topKFrequent(nums, k))
+strs = ["neet","code","love","you"]
+
+# if there are no special characters like # for example
+# def encode(strs):
+#     single = ""
+#     for s in strs:
+#         single += s
+#         single += "#"
+#     return single
+
+# def decode(s):
+#     strs = []
+#     j = 0
+#     for i in range(len(s)):
+#         if s[i] == "#":
+#             strs.append(s[j:i])
+#             j = i + 1
+
+#     return strs
+
+# if there can be special characters like # in the input strings
+
+def encode(strs):
+    single = ""
+    for s in strs:
+        single += str(len(s)) + "#" + s
+    return single
+
+def decode(s):
+    strs = []
+    i = 0
+    while i < len(s):  
+        j = i
+        while s[j] != "#":
+            j += 1
+        
+        length = int(s[i:j])
+        i = j + 1 # j is at delimiter -> go past it by 1 index
+        j = i + length
+        strs.append(s[i:j])
+        i = j
+    return strs
+
+#print(encode(strs))
+#print(decode(encode(strs)))
+
+# O(n^2)
+# def product_except_self(nums):
+#     product = []
+#     for i in range(len(nums)):
+#         single_prod = 1
+#         for j in range(len(nums)):
+#             if i == j:
+#                 continue
+#             else:
+#                 if nums[j] == 0:
+#                     single_prod = 0
+#                     break
+#                 single_prod *= nums[j]
+#         product.append(single_prod)
+#     return product
+
+
+def product_except_self(nums):
+        res = [1] * (len(nums))
+
+        for i in range(1, len(nums)):
+            res[i] = res[i-1] * nums[i-1]
+        postfix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix
+            postfix *= nums[i]
+        return res
+
+nums = [0, 0]
+#print(product_except_self(nums))
+
+def longestConsecutive(nums):
+    numSet = set(nums)
+    longest = 0
+
+    for n in numSet:
+        if (n - 1) not in numSet:
+            length = 1
+            while (n + length) in numSet:
+                length += 1
+            longest = max(length, longest)
+    return longest
+
+s = "Was it a car or a cat I saw?"
+
+def isPalindrome(s):
+        def remove_non_alphabetical(s):
+            return ''.join([char for char in s if char.isalnum()])
+        
+        s = s.replace(" ", "").lower()
+        s = remove_non_alphabetical(s)
+        print(s)
+        left = 0
+        right = len(s) - 1
+
+        while left < right:
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+        
+        return True
+
+#print(isPalindrome(s))
+
+def twoSum(numbers, target):
+        left = 0
+        right = len(numbers) - 1
+
+        while left < right:
+            sum = numbers[left] + numbers[right]
+            if sum == target:
+                return [left, right]
+            elif sum > target:
+                right -= 1
+            else:
+                left += 1
+
+numbers = [1,2,3,4]
+target = 3
+#print(twoSum(numbers, target))
+
+nums = [-1,0,1,2,-1,-4]
+
+def threeSum(nums):
+    res = []
+    nums.sort()
+    for i, n in enumerate(nums):
+        
+        if i > 0 and n == nums[i - 1]:
+            continue
+
+        if n > 0:
+            break
+                
+        l = i + 1
+        r = len(nums) - 1
+        while l < r:
+            sum = n + nums[l] + nums[r]
+            if sum < 0:
+                l += 1
+            elif sum > 0:
+                r -= 1
+            else: # ==
+                res.append([n, nums[l], nums[r]])
+                l += 1
+                r -= 1
+                while nums[l] == nums[l - 1] and l < r:
+                        l += 1
+        return res
+
+
+print(threeSum(nums))
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
