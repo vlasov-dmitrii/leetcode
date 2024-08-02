@@ -1,1 +1,1 @@
-A collection of blind leetcode questions
+A collection of leetcode questions
