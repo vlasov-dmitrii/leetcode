@@ -681,10 +681,18 @@ def threeSum(nums):
         return res
 
 
-print(threeSum(nums))
+#print(threeSum(nums))
 
+def trap(heights):
+    area = 0
+    l = 0
+    r = 1
 
-
+    while l < len(heights):
+        
+    
+        
+        
 
 
 
